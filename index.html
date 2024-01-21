@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROCK PAPER SCISSOR</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+    }
+    body {
+        background-color: #bdff60;
+        color: #fff;
+    }
+    .title-container {
+        padding: 2rem 5rem;
+    }
+    h2 {
+        background-color: #30362fdc;
+        height: 4rem;
+        line-height: 4rem;
+        border: none;
+        border-radius: 10px;
+    }
+    .choices {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+    }
+    .choice {
+        height: 7rem;
+        width: 7rem;
+        background-color: rgba(0, 0, 0, 0.517);
+        justify-content: center;
+        border: none;
+        border-radius: 5rem;
+    }
+    .choice:hover {
+        opacity: .5;
+        font-size: 2rem;
+        cursor: pointer;
+        color: #fff;
+    }
+    .text {
+        line-height: 7rem;
+    }
+    .score-board {
+        display: flex;
+        justify-content: center;
+        font-size: 2rem;
+        margin-top: 2rem;
+        gap: 2rem;
+    }
+    #user-score {
+        font-size: 5rem;
+        color: blue;
+    }
+    #comp-score {
+        font-size: 5rem;
+        color: red;
+    }
+    .msg-container {
+        padding: 1rem 10rem;
+    }
+    #msg {
+        font-size: 3rem;
+        margin-top: 0rem;
+        background-color: #30362f6d;
+        border-radius: 1rem;
+    }
+    #re-btn {
+        margin-top: 1rem;
+        font-size: 2rem;
+        border: none;
+        border-radius: 1rem;
+        padding: 10px;
+        background-color: #30362f6d;
+        color: #fff;
+    }
+    #re-btn:hover {
+        opacity: .5;
+        font-size: 2.5rem;
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title-container">
+            <h2>Rock Paper Scissor</h2>
+        </div>
+        <div class="choices">
+            <div class="choice">
+                <p class="text" id="rock">Rock</p>
+            </div>
+            <div class="choice">
+                <p class="text" id="paper">Paper</p>
+            </div>
+            <div class="choice">
+                <p class="text" id="scissor">Scissor</p>
+            </div>
+        </div>
+        <div class="score-board">
+            <div class="player-score">
+                <p id="user-score">0</p>
+                 ^<br>
+                You
+            </div>
+            <div class="computer-score">
+                <p id="comp-score">0</p>
+                 ^<br>
+                Comp
+            </div>
+        </div>
+        <button id="re-btn"> Reset </button>
+        <div class="msg-container">
+            <p id="msg">Play</p>
+        </div>
+    </div>
+    <script>
+        var userScore = 0;
+        var compScore = 0;
+
+        var compchoices = ["rock", "paper", "scissor"]; 
+
+        let rock = document.querySelector("#rock");
+        let paper = document.querySelector("#paper");
+        let scissor = document.querySelector("#scissor");
+        let reBtn = document.querySelector("#re-btn");
+
+        let playScore = document.querySelector("#user-score");
+        let botScore = document.querySelector("#comp-score");
+
+        let msg = document.querySelector("#msg");
+
+        const gameWin = (compChoice, userChoice) => {
+            if(userChoice === compChoice) {
+                msg.innerText = "Game Draw";
+                msg.style.backgroundColor = "#30362f6d";
+            }else {
+                if(userChoice === "paper") {
+                    if(compChoice === "rock") {
+                        userScore ++;
+                        msg.innerText = "You Win";
+                        msg.style.backgroundColor = "blue";
+                    }else {
+                        compScore++;
+                        msg.innerText = "Comp Win";
+                        msg.style.backgroundColor = "red";
+                    }
+                }else if(userChoice === "rock") {
+                    if(compChoice === "scissor") {
+                        userScore ++;
+                        msg.innerText = "You Win";
+                        msg.style.backgroundColor = "blue";
+                    }else {
+                        compScore++;
+                        msg.innerText = "Comp Win";
+                        msg.style.backgroundColor = "red";
+                    }
+                }else if(userChoice === "scissor") {
+                    if(compChoice === "paper") {
+                        userScore ++;
+                        msg.innerText = "You Win";
+                        msg.style.backgroundColor = "blue";
+                    }else {
+                        compScore++;
+                        msg.innerText = "Comp Win";
+                        msg.style.backgroundColor = "red";
+                    }
+                }
+            }
+            playScore.innerText = userScore;
+            botScore.innerText = compScore
+        }
+
+        const compChoice = (userChoice) => {
+            compchoice = Math.floor(Math.random() * 3);
+            choice = compchoices[compchoice];
+            userchoice = userChoice;
+            gameWin(choice, userchoice)
+        }
+
+        rock.addEventListener("click", () => {
+            compChoice("rock");
+        });
+        paper.addEventListener("click", () => {
+            compChoice("paper");
+        });
+        scissor.addEventListener("click", () => {
+            compChoice("scissor");
+        });
+
+        reBtn.addEventListener("click", () => {
+            playScore.innerText = 0;
+            botScore.innerText = 0;
+            userScore = 0;
+            compScore = 0;
+            msg.innerText = "Play";
+            msg.style.backgroundColor = "#30362f6d";
+        });
+    </script>
+</body>
+</html>
